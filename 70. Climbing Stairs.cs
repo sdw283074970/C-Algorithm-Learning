@@ -2,8 +2,9 @@
 //Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
 
 //My solution
+//There is a bug says function zh attemped to divid zero. Not fixed yet.
 
-public class Solution {
+public class MySolution {
     public int jc(int c) {
         int jc1 = 1;
         for (int i = 1; i <= c; i++) {
@@ -43,8 +44,9 @@ public class Solution {
 }
 
 //Master's solution
+//Variable 'a' tells you the number of ways to reach the current step, and 'b' tells you the number of ways to reach the next step.
 
-public class Solution {
+public class DaLaoDeSolution {
     public int ClimbStairs(int n) {
     int a = 1, b = 1;
     while (n-- > 0)
