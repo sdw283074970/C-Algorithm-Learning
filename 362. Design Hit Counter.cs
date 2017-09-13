@@ -1,14 +1,17 @@
-
+//Problem description: https://leetcode.com/problems/design-hit-counter/description/
+//This version may exceed memory limit. Not fixed yet.
 
 public class HitCounter {
     
-
+        int count;
+        int prevtmstp;
+        int curtmstp;
+        Stack<int> sta = new Stack<int>();
     /** Initialize your data structure here. */
     public HitCounter() {
-        int count = 0;
-        int prevtmstp = 0;
-        int curtmstp = 0;
-        Stack<int> sta = new Stack<int>();
+        count = 0;
+        prevtmstp = 0;
+        curtmstp = 0;
     }
     
     /** Record a hit.
@@ -31,17 +34,30 @@ public class HitCounter {
     /** Return the number of hits in the past 5 minutes.
         @param timestamp - The current timestamp (in seconds granularity). */
     public int GetHits(int timestamp) {
-        if (sta.Count <= 300) {
-            int[] countarray = sta.ToArray();
-            foreach (int c in countarray) {
-                count += c;
+        int len = 0;
+        count = 0;
+        int[] countarray = sta.ToArray();
+        Array.Reverse(countarray);
+        if (timestamp <= 300) {
+            if (timestamp >= countarray.Length) {
+                len = countarray.Length;
+            }
+            else {
+                len = timestamp;
+            }
+            for (int c = 0; c < len; c++) {
+                count += countarray[c];
             }
             return count;
         }
         else {
-            int[] countarray = sta.ToArray();
-            Array.Reverse(countarray);
-            for (int k = timestamp - 300; k < timestamp; k++) {
+            if (timestamp >= countarray.Length) {
+                len = countarray.Length;
+            }
+            else {
+                len = timestamp;
+            }
+            for (int k = timestamp - 300; k < len; k++) {
                 count += countarray[k];
             }
             return count;
