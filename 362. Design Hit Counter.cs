@@ -71,3 +71,50 @@ public class HitCounter {
  * obj.Hit(timestamp);
  * int param_2 = obj.GetHits(timestamp);
  */
+
+// This version fixed the previous problem by using a pointer but the same logic
+
+public class HitCounter {
+    
+    private int[] times;
+    private int[] hits;
+    
+        Stack<int> sta = new Stack<int>();
+    /** Initialize your data structure here. */
+    public HitCounter() {
+        times = new int[300];
+        hits = new int[300];
+    }
+    
+    /** Record a hit.
+        @param timestamp - The current timestamp (in seconds granularity). */
+    public void Hit(int timestamp) {
+        int index = timestamp % 300;
+        if (times[index] != timestamp) {
+            times[index] = timestamp;
+            hits[index] = 1;
+        } 
+        else {
+            hits[index]++;
+        }
+    }
+    
+    /** Return the number of hits in the past 5 minutes.
+        @param timestamp - The current timestamp (in seconds granularity). */
+    public int GetHits(int timestamp) {
+        int total = 0;
+        for (int i = 0; i < 300; i++) {
+            if (timestamp - times[i] < 300) {
+                total += hits[i];
+            }
+        }
+        return total;
+    }
+}
+
+/**
+ * Your HitCounter object will be instantiated and called as such:
+ * HitCounter obj = new HitCounter();
+ * obj.Hit(timestamp);
+ * int param_2 = obj.GetHits(timestamp);
+ */
