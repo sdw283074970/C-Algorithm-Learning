@@ -23,3 +23,8 @@ public static string GenerateRandomNumber(int Length) {
     }
     return newRandom.ToString();
 }
+
+//改编自String.Contains的源码
+public bool contains(string str1, string str2) {
+        return (str1.IndexOf(str2, StringComparison.Ordinal) >= 0);
+    }
