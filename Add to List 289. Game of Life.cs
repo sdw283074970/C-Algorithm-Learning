@@ -58,3 +58,41 @@ public class Solution {
         return cells;
     }
 }
+
+//Version 2, dosent work, too
+public class Solution {
+    public void GameOfLife(int[,] board) {
+        for (int i = 0; i < board.GetLength(0); ++i) {
+            for (int j = 0; j < board.GetLength(1); ++j) {
+                int liveCells = liveNeighbors(board, i , j);
+                if (board[i, j] == 1) {
+                    if (liveCells == 2 || liveCells == 3) {
+                        board[i, j] = 3;
+                    }
+                }
+                else {
+                    if (liveCells == 3) {
+                        board[i, j] = 2;
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < board.GetLength(0); ++i) {
+            for (int j = 0; j < board.GetLength(1); ++j) {
+                board[i, j] >>= 1;
+            }
+        }
+    }
+    public int liveNeighbors(int[,] board, int row, int col) {
+        int cells = 0;
+        for (int i = row - 1; i <= row + 1; ++i) {
+            for (int j = col - 1; j <= col + 1; ++j) {
+                if (i > 0 && i < board.GetLength(0) && j > 0 && j < board.GetLength(1)) {
+                    cells += board[i, j] & 1;
+                }
+            }
+        }
+        cells -= board[row, col] & 1;
+        return cells;
+    }
+}
