@@ -25,8 +25,6 @@ public class Solution {
         for (int idx = 1; idx < sb.Length; idx++) {
             sb[0].Append(sb[idx]);
         }
-        string res;
-        res = sb[0].ToString();
-        return res;
+        return sb[0].ToString();
     }
 }
