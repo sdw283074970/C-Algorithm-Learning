@@ -2,20 +2,20 @@
 
 public class Solution {
     public int NthUglyNumber(int n) {
-		if (n <= 0) {
+	if (n <= 0) {
            return 0; 
         }
-		int a = 0, b = 0, c = 0;
-		ArrayList table = new ArrayList();
-		table.Add(1);
-		while(table.Count < n) {
-			int next_val = Math.Min(Convert.ToInt32(table[a]) * 2, Math.Min(Convert.ToInt32(table[b]) * 3, Convert.ToInt32(table[c]) * 5));
-			table.Add(next_val);
-			if (Convert.ToInt32(table[a]) * 2 == next_val) a++;
-			if (Convert.ToInt32(table[b]) * 3 == next_val) b++;
-			if (Convert.ToInt32(table[c]) * 5 == next_val) c++;
-		}
-		return Convert.ToInt32(table[table.Count - 1]);
+	int a = 0, b = 0, c = 0;
+	ArrayList table = new ArrayList();
+	table.Add(1);
+	while(table.Count < n) {
+		int next_val = Math.Min(Convert.ToInt32(table[a]) * 2, Math.Min(Convert.ToInt32(table[b]) * 3, Convert.ToInt32(table[c]) * 5));
+		table.Add(next_val);
+		if (Convert.ToInt32(table[a]) * 2 == next_val) a++;
+		if (Convert.ToInt32(table[b]) * 3 == next_val) b++;
+		if (Convert.ToInt32(table[c]) * 5 == next_val) c++;
+	}
+	return Convert.ToInt32(table[table.Count - 1]);
     }
 }
 
