@@ -169,7 +169,7 @@ public class Solution {
                 dp[i] = i / coins[0];
             }
             else {
-                dp[i] = 2000000000;
+                dp[i] = amount + 1;
             }
             for (int j = 0; j < coins.Length; j++) {
                 if (coins[j] <= i) {
