@@ -98,3 +98,63 @@ public class Solution {
         return dp[coins.Length - 1, amount] > 0 ? dp[coins.Length - 1, amount] : -1;
     }
 }
+
+//Version 3: time exceeded
+
+public class Solution {
+    public int CoinChange(int[] coins, int amount) {
+        if (amount == 0) {
+            return 0;
+        }
+        int[,] dp = new int[coins.Length, amount + 1];
+        for (int i = 0; i < coins.Length; i++) {
+            dp[i, 0] = 1;
+        }
+        for (int i = 1; i <= amount; i++) {
+            if (i % coins[0] == 0) {
+                dp[0, i] = i / coins[0];
+            }
+        }
+        for (int i = 1; i < coins.Length; i++) {
+            for (int j = 1; j <= amount; j++) {
+                int k = 1, m = 1;
+                if (j % coins[i] == 0) {
+                    if (dp[i - 1, j] != 0) {
+                        dp[i, j] = Math.Min(dp[i - 1, j], j / coins[i]);
+                    }
+                    else if (dp[i - 1, j] == 0) {
+                        dp[i, j] = j / coins[i];
+                    }
+                }
+                else if (j > coins[i]) {
+                    bool isExist = false;
+                    while (k <= j / coins[i]) {
+                        if (dp[i - 1, j - k * coins[i]] != 0) {
+                            isExist = true;
+                            dp[i, j] = dp[i - 1, j - k * coins[i]] + k;
+                            k = j / coins[i] + 1;
+                        }
+                        k += 1;
+                    }
+                    if (isExist == false) {
+                        dp[i, j] = dp[i - 1, j];
+                    }
+                    else if (isExist == true) {
+                        while (m <= j / coins[i]) {
+                            if (dp[i - 1, j - m * coins[i]] != 0) {
+                                dp[i, j] = Math.Min(dp[i, j], dp[i - 1, j - m * coins[i]] + m);
+                            }
+                        }
+                        if (dp[i - 1, j] != 0) {
+                            dp[i, j] = Math.Min(dp[i, j], dp[i - 1, j]);
+                        }
+                    }
+                }
+                else if (j < coins[i]) {
+                    dp[i, j] = dp[i - 1, j];
+                }
+            }
+        }
+        return dp[coins.Length - 1, amount] > 0 ? dp[coins.Length - 1, amount] : -1;
+    }
+}
