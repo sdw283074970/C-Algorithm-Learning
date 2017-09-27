@@ -39,11 +39,6 @@ public class Solution {
                 }
             }
         }
-        if (dp[coins.Length - 1, amount] != 0) {
-            return dp[coins.Length - 1, amount];
-        }
-        else {
-            return -1;
-        }
+        return dp[coins.Length - 1, amount] > 0 ? dp[coins.Length - 1, amount] : -1;
     }
 }
