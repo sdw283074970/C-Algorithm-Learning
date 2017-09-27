@@ -158,3 +158,30 @@ public class Solution {
         return dp[coins.Length - 1, amount] > 0 ? dp[coins.Length - 1, amount] : -1;
     }
 }
+
+//Worked version
+
+public class Solution {
+    public int CoinChange(int[] coins, int amount) {
+        int[] dp = new int[amount + 1];
+        for (int i = 0; i <= amount; i++) {
+            if (i % coins[0] == 0) {
+                dp[i] = i / coins[0];
+            }
+            else {
+                dp[i] = 2000000000;
+            }
+            for (int j = 0; j < coins.Length; j++) {
+                if (coins[j] <= i) {
+                    dp[i] = Math.Min(dp[i], dp[i - coins[j]] + 1);
+                }
+            }
+        }
+        if (dp[amount] > amount) {
+            return -1;
+        }
+        else {
+            return dp[amount];
+        }
+    }
+}
