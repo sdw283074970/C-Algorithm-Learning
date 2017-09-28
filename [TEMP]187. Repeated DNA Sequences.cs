@@ -1,4 +1,7 @@
-//Problem description: 
+//Problem description: https://leetcode.com/problems/repeated-dna-sequences/description/
+
+//Cases passed: 31/32
+//Needed to be fixed
 
 public class Solution {
     public IList<string> FindRepeatedDnaSequences(string s) {
